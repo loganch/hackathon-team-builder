@@ -1,5 +1,34 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .content
+    .container
+      h1= title
+      p We generate a hackathon team based on students' interests
+
+      .columns
+        .column
+        .column
+          .button.is-large#common Common Interests
+        .column
+          .button.is-large#different Different Interests
+        .column
+      
+      .columns
+        .column
+          .card#card1
+            .card-content
+              .content
+                .title Name
+                .subtitle Main Skill
+        .column
+          .card#card2
+            .card-content
+        .column
+          .card#card3
+            .card-content
+        .column
+          .card#card4
+            .card-content
+    //- 
+    script(src="javascripts/getTeam.js")
