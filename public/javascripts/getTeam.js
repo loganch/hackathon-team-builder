@@ -1,102 +1,71 @@
 var common = document.getElementById('common');
 var different = document.getElementById('different');
 
-var GoogleSpreadsheet = require('google-spreadsheet');
-var Async = require('async');
-var doc = new GoogleSpreadsheet('1VaSkPxcKhNXHhFoMMs5OGyXjB-gZQZamTL9ue6YRKiw');
-var sheet;
-
-async.series([
-  function setAuth(step) {
-    // see notes below for authentication instructions!
-    var creds = require('./google-generated-creds.json');
-    // OR, if you cannot save the file locally (like on heroku)
-    var creds_json = {
-      client_email: 'yourserviceaccountemailhere@google.com',
-      private_key: 'your long private key stuff here'
-    }
- 
-    doc.useServiceAccountAuth(creds, step);
-  },
-  function getInfoAndWorksheets(step) {
-    doc.getInfo(function(err, info) {
-      console.log('Loaded doc: '+info.title+' by '+info.author.email);
-      sheet = info.worksheets[0];
-      console.log('sheet 1: '+sheet.title+' '+sheet.rowCount+'x'+sheet.colCount);
-      step();
-    });
-  },
-  function workingWithRows(step) {
-    // google provides some query options
-    sheet.getRows({
-      offset: 1,
-      limit: 20,
-      orderby: 'col2'
-    }, function( err, rows ){
-      console.log('Read '+rows.length+' rows');
-
-      // the row is an object with keys set by the column headers
-      rows[0].colname = 'new val';
-      rows[0].save(); // this is async
-
-      // deleting a row
-      rows[0].del();  // this is async
-
-      step();
-    });
-  },
-  function workingWithCells(step) {
-    sheet.getCells({
-      'min-row': 1,
-      'max-row': 5,
-      'return-empty': true
-    }, function(err, cells) {
-      var cell = cells[0];
-      console.log('Cell R'+cell.row+'C'+cell.col+' = '+cells.value);
-
-      // cells have a value, numericValue, and formula
-      cell.value == '1'
-      cell.numericValue == 1;
-      cell.formula == '=ROW()';
-
-      // updating `value` is "smart" and generally handles things for you
-      cell.value = 123;
-      cell.value = '=A1+B2'
-      cell.save(); //async
-
-      // bulk updates make it easy to update many cells at once
-      cells[0].value = 1;
-      cells[1].value = 2;
-      cells[2].formula = '=A1+B1';
-      sheet.bulkUpdateCells(cells); //async
-
-      step();
-    });
-  },
-  function managingSheets(step) {
-    doc.addWorksheet({
-      title: 'my new sheet'
-    }, function(err, sheet) {
-
-      // change a sheet's title
-      sheet.setTitle('new title'); //async
-
-      //resize a sheet
-      sheet.resize({rowCount: 50, colCount: 20}); //async
-
-      sheet.setHeaderRow(['name', 'age', 'phone']); //async
-
-      // removing a worksheet
-      sheet.del(); //async
-
-      step();
-    });
-  }
-]);
 
 common.onclick = function() {
-    alert("Common interest getting start!");
+    var client = new HttpClient();
+    client.get('/common', function(res) {
+        var rows = JSON.parse(res);
+
+        var business_students = [];
+        var software_students = [];
+        var hardware_students = [];
+
+        // seperate each name into respective arrays based on category
+        for (var i in rows) {
+            if (rows[i].whatareyouinterestedinworkingon == 'Business') {
+              business_students.push(rows[i].firstname + " " + rows[i].lastname);
+            }
+            if (rows[i].whatareyouinterestedinworkingon == 'Software') {
+              software_students.push(rows[i].firstname + " " + rows[i].lastname);
+            }
+            if (rows[i].whatareyouinterestedinworkingon == 'Hardware') {
+              hardware_students.push(rows[i].firstname + " " + rows[i].lastname);
+            }
+            console.log(rows[i].firstname);
+        }
+
+        num_teams = business_students.length + software_students.length + hardware_students.length;
+        num_teams = Math.floor(num_teams/3);
+        var team = [];
+        var extras = [];
+
+        for (var i = 0; i < num_teams; i++) {
+          while (team.length < 3 && business_students.length + software_students.length + hardware_students.length > 0) {
+            if (business_students.length > 0) team.push(business_students.pop());
+            if (software_students.length > 0) team.push(software_students.pop());
+            if (hardware_students.length > 0) team.push(software_students.pop());
+          }
+        }
+        while (business_students.length + software_students.length + hardware_students.length > 0) {
+          if (business_students.length > 0) extras.push(business_students.pop());
+          if (software_students.length > 0) extras.push(software_students.pop());
+          if (hardware_students.length > 0) extras.push(software_students.pop());
+        }
+
+        console.log(num_teams);
+
+        console.log(business_students);
+        console.log(software_students);
+        console.log(hardware_students);
+    });
 };
 different.onclick = function() {
-    alert("Different interest getting start!");
+    var client = new HttpClient();
+    client.get('/different', function(res) {
+        alert('Responded with ' + res);
+    });
 };
+
+var HttpClient = function() {
+    this.get = function(aUrl, aCallback) {
+        var anHttpRequest = new XMLHttpRequest();
+        anHttpRequest.onreadystatechange = function() {
+            if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+                aCallback(anHttpRequest.responseText);
+        }
+
+        anHttpRequest.open("GET", aUrl, true);
+        anHttpRequest.send(null);
+    }
+}
