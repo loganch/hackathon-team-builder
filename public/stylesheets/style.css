@@ -12,7 +12,9 @@ body {
 }
 
 #maintitle,
-p.subtitle {
+p.subtitle,
+.title,
+.subtitle {
     color: #ffffff;
 }
 
@@ -21,15 +23,17 @@ p.subtitle {
     color: white;
 }
 
+.Software .title,
+.Software .subtitle {
+    color: #2d5384;
+}
+
 .Hardware {
-    background-color: #c1212d;
+    /*background-color: #c1212d;*/
+    background-color: #ec7981;
     color: white !important;
 }
 
 .Business {
     background-color: #df1f2d;
-}
-
-.card.card-content.content.title {
-    color: white;
 }
