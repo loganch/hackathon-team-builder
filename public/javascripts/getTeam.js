@@ -31,11 +31,13 @@ common.onclick = function() {
         var extras = [];
 
         for (var i = 0; i < num_teams; i++) {
+          team = [];
           while (team.length < 3 && business_students.length + software_students.length + hardware_students.length > 0) {
             if (business_students.length > 0) team.push(business_students.pop());
             if (software_students.length > 0) team.push(software_students.pop());
             if (hardware_students.length > 0) team.push(software_students.pop());
           }
+          console.log(team)
         }
         while (business_students.length + software_students.length + hardware_students.length > 0) {
           if (business_students.length > 0) extras.push(business_students.pop());
