@@ -7,6 +7,10 @@ function showCards() {
     teams.classList.toggle('is-hidden');
 }
 
+function clearTeams() {
+    teams.textContent = '';
+}
+
 function makeCards(data = []) {
     var cardsCode = "";
 
@@ -26,6 +30,7 @@ function makeCards(data = []) {
     cardNode.classList.add('columns');
     cardNode.classList.add('section');
     cardNode.innerHTML = cardsCode;
+
     teams.appendChild(cardNode);
 }
 

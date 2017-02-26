@@ -3,6 +3,7 @@ var different = document.getElementById('different');
 
 
 different.onclick = function() {
+    clearTeams();
     var client = new HttpClient();
     client.get('/different', function(res) {
         var rows = JSON.parse(res);
@@ -13,16 +14,17 @@ different.onclick = function() {
         var extras = [];
 
         // seperate each name into respective arrays based on category
+        console.log("TEST: Brought in " + rows.length);
         for (var i in rows) {
-            if (rows[i].whatareyouinterestedinworkingon == 'Business') {
-                business_students.push(rows[i].firstname + " " + rows[i].lastname);
-            }
-            if (rows[i].whatareyouinterestedinworkingon == 'Software') {
-                software_students.push(rows[i].firstname + " " + rows[i].lastname);
-            }
-            if (rows[i].whatareyouinterestedinworkingon == 'Hardware') {
-                hardware_students.push(rows[i].firstname + " " + rows[i].lastname);
-            }
+            // if (rows[i].whatareyouinterestedinworkingon == 'Business') {
+            //     business_students.push(rows[i].firstname + " " + rows[i].lastname);
+            // }
+            // if (rows[i].whatareyouinterestedinworkingon == 'Software') {
+            //     software_students.push(rows[i].firstname + " " + rows[i].lastname);
+            // }
+            // if (rows[i].whatareyouinterestedinworkingon == 'Hardware') {
+            //     hardware_students.push(rows[i].firstname + " " + rows[i].lastname);
+            // }
             var random = Math.floor(Math.random() * (10));
             if (rows[i].whatareyouinterestedinworkingon == 'Business') {
                 if (random % 2 == 0) business_students.push(rows[i].firstname + " " + rows[i].lastname);
@@ -65,6 +67,7 @@ different.onclick = function() {
     });
 };
 common.onclick = function() {
+    clearTeams();
     var client = new HttpClient();
     client.get('/common', function(res) {
 
