@@ -10,17 +10,18 @@ common.onclick = function() {
         var business_students = [];
         var software_students = [];
         var hardware_students = [];
+        var extras = [];
 
         // seperate each name into respective arrays based on category
         for (var i in rows) {
             if (rows[i].whatareyouinterestedinworkingon == 'Business') {
-              business_students.push(rows[i].firstname + " " + rows[i].lastname);
+                business_students.push(rows[i].firstname + " " + rows[i].lastname);
             }
             if (rows[i].whatareyouinterestedinworkingon == 'Software') {
-              software_students.push(rows[i].firstname + " " + rows[i].lastname);
+                software_students.push(rows[i].firstname + " " + rows[i].lastname);
             }
             if (rows[i].whatareyouinterestedinworkingon == 'Hardware') {
-              hardware_students.push(rows[i].firstname + " " + rows[i].lastname);
+                hardware_students.push(rows[i].firstname + " " + rows[i].lastname);
             }
         }
         console.log(business_students);
@@ -28,23 +29,24 @@ common.onclick = function() {
         console.log(hardware_students);
 
         num_teams = business_students.length + software_students.length + hardware_students.length;
-        num_teams = Math.floor(num_teams/3);
+        num_teams = Math.floor(num_teams / 3);
         var team = [];
-        var extras = [];
+
 
         for (var i = 0; i < num_teams; i++) {
-          team = [];
-          while (team.length < 3 && business_students.length + software_students.length + hardware_students.length > 0) {
-            if (business_students.length > 0 && team.length != 3) team.push([business_students.pop(), "Business"]);
-            if (software_students.length > 0 && team.length != 3) team.push([software_students.pop(), "Software"]);
-            if (hardware_students.length > 0 && team.length != 3) team.push([hardware_students.pop(), "Hardware"]);
-          }
-          console.log(team);
+            team = [];
+            while (team.length < 3 && business_students.length + software_students.length + hardware_students.length > 0) {
+                if (business_students.length > 0 && team.length != 3) team.push([business_students.pop(), "Business"]);
+                if (software_students.length > 0 && team.length != 3) team.push([software_students.pop(), "Software"]);
+                if (hardware_students.length > 0 && team.length != 3) team.push([hardware_students.pop(), "Hardware"]);
+            }
+            console.log(team);
+            makeCards(team);
         }
         while (business_students.length + software_students.length + hardware_students.length > 0) {
-          if (business_students.length > 0) extras.push([business_students.pop(), "Business"]);
-          if (software_students.length > 0) extras.push([software_students.pop(), "Software"]);
-          if (hardware_students.length > 0) extras.push([hardware_students.pop(), "Hardware"]);
+            if (business_students.length > 0) extras.push([business_students.pop(), "Business"]);
+            if (software_students.length > 0) extras.push([software_students.pop(), "Software"]);
+            if (hardware_students.length > 0) extras.push([hardware_students.pop(), "Hardware"]);
         }
         console.log(extras);
     });

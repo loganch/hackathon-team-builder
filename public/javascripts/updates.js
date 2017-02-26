@@ -23,11 +23,11 @@ function makeCards(data = []) {
     teams.appendChild(cardNode);
 }
 
-test.onclick = function() {
-    teams.innerHTML = ''; //erase existing cards
-    makeCards([
-        ["Wendell", "Software"],
-        ["Kari", "Software"],
-        ["Logan", "Software"]
-    ]);
-}
+// test.onclick = function() {
+//     teams.innerHTML = ''; //erase existing cards
+//     makeCards([
+//         ["Wendell", "Software"],
+//         ["Kari", "Software"],
+//         ["Logan", "Software"]
+//     ]);
+// }
