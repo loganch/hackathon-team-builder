@@ -1,1 +1,17 @@
 @import "bulma.css";
+body {
+    background-color: #2d5384;
+    background: linear-gradient(to bottom right, #2d5384, #447bbe);
+}
+
+.container,
+#teams,
+.hero,
+.section {
+    background: rgba(0, 0, 0, 0);
+}
+
+#maintitle,
+p.subtitle {
+    color: #ffffff;
+}
