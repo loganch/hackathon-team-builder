@@ -11,14 +11,20 @@ function makeCards(data = []) {
     var cardsCode = "";
 
     //create the cards
-    for (var i in data) {
+    // var teamNode = document.createElement('div');
+    // teamNode.classList.add('columns');
+    // teamNode.innerHTML = "<div class='columns'><div class='column'><h2>Team</h2></div></div>";
+    // teams.appendChild(teamNode);
 
-        cardsCode += '<div class="column"><div class="card"><div class="card-content"><div class="content">'
-        cardsCode += '<div class="title">' + data[i][0] + '</div><div class="subtitle">' + data[i][1]
-        cardsCode += '</div></div></div></div></div>'
+    for (var i in data) {
+        cardsCode += '<div class="column"><div class="card"><div class="card-content"><div class="content">';
+        cardsCode += '<div class="title">' + data[i][0] + '</div><div class="subtitle">' + data[i][1];
+        cardsCode += '</div></div></div></div></div></div>';
     }
+
     var cardNode = document.createElement('div');
-    cardNode.classList.add('columns')
+    cardNode.classList.add('columns');
+    cardNode.classList.add('section');
     cardNode.innerHTML = cardsCode;
     teams.appendChild(cardNode);
 }
