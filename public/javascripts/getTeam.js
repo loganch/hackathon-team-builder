@@ -2,9 +2,9 @@ var common = document.getElementById('common');
 var different = document.getElementById('different');
 
 
-common.onclick = function() {
+different.onclick = function() {
     var client = new HttpClient();
-    client.get('/common', function(res) {
+    client.get('/different', function(res) {
         var rows = JSON.parse(res);
 
         var business_students = [];
@@ -51,9 +51,9 @@ common.onclick = function() {
         console.log(extras);
     });
 };
-different.onclick = function() {
+common.onclick = function() {
     var client = new HttpClient();
-    client.get('/different', function(res) {
+    client.get('/common', function(res) {
         alert('Responded with ' + res);
     });
 };
