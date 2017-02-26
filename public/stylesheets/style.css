@@ -15,3 +15,21 @@ body {
 p.subtitle {
     color: #ffffff;
 }
+
+.Software {
+    background-color: #b4d6e0;
+    color: white;
+}
+
+.Hardware {
+    background-color: #c1212d;
+    color: white !important;
+}
+
+.Business {
+    background-color: #df1f2d;
+}
+
+.card.card-content.content.title {
+    color: white;
+}

@@ -21,7 +21,8 @@ function makeCards(data = []) {
     // teams.appendChild(teamNode);
 
     for (var i in data) {
-        cardsCode += '<div class="column"><div class="card"><div class="card-content"><div class="content">';
+        cardsCode += '<div class="column">';
+        cardsCode += '<div class="card ' + data[i][1] + ' "><div class="card-content"><div class="content">';
         cardsCode += '<div class="title">' + data[i][0] + '</div><div class="subtitle">' + data[i][1];
         cardsCode += '</div></div></div></div></div></div>';
     }

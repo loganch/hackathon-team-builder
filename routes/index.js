@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Hackathon Team Builder' });
+    res.render('index', { title: 'Team Wide Web' });
 });
 
 module.exports = router;
