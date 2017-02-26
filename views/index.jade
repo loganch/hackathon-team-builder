@@ -5,6 +5,7 @@ block content
     .container
       h1= title
       p We generate a hackathon team based on students' interests
+      .button#test TEST
 
       .columns
         .column
@@ -14,23 +15,8 @@ block content
           .button.is-large#different Different Interests
         .column
       
-      .columns
-        .column
-          .card#card1
-            .card-content
-              .content
-                .title Name
-                .subtitle Main Skill
-        .column
-          .card#card2
-            .card-content
-        .column
-          .card#card3
-            .card-content
-        .column
-          .card#card4
-            .card-content
-      
-      .content#output
+      #teams
+
     //- 
     script(src="javascripts/getTeam.js")
+    script(src="javascripts/updates.js")
