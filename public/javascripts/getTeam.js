@@ -4,6 +4,7 @@ var different = document.getElementById('different');
 
 different.onclick = function() {
     clearTeams();
+    different.classList.add('is-loading');
     var client = new HttpClient();
     client.get('/different', function(res) {
         var rows = JSON.parse(res);
@@ -57,6 +58,7 @@ different.onclick = function() {
             }
             console.log(team);
             makeCards(team);
+            different.classList.remove('is-loading');
         }
         while (business_students.length + software_students.length + hardware_students.length > 0) {
             if (business_students.length > 0) extras.push([business_students.pop(), "Business"]);
@@ -68,6 +70,7 @@ different.onclick = function() {
 };
 common.onclick = function() {
     clearTeams();
+    common.classList.add('is-loading');
     var client = new HttpClient();
     client.get('/common', function(res) {
 
@@ -111,6 +114,7 @@ common.onclick = function() {
             }
             console.log(team);
             makeCards(team);
+            common.classList.remove('is-loading');
         }
         while (business_students.length + software_students.length + hardware_students.length > 0) {
             if (business_students.length > 0) extras.push([business_students.pop(), "Business"]);
