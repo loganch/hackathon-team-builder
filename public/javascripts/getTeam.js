@@ -22,8 +22,10 @@ common.onclick = function() {
             if (rows[i].whatareyouinterestedinworkingon == 'Hardware') {
               hardware_students.push(rows[i].firstname + " " + rows[i].lastname);
             }
-            console.log(rows[i].firstname);
         }
+        console.log(business_students);
+        console.log(software_students);
+        console.log(hardware_students);
 
         num_teams = business_students.length + software_students.length + hardware_students.length;
         num_teams = Math.floor(num_teams/3);
@@ -33,23 +35,18 @@ common.onclick = function() {
         for (var i = 0; i < num_teams; i++) {
           team = [];
           while (team.length < 3 && business_students.length + software_students.length + hardware_students.length > 0) {
-            if (business_students.length > 0) team.push(business_students.pop());
-            if (software_students.length > 0) team.push(software_students.pop());
-            if (hardware_students.length > 0) team.push(software_students.pop());
+            if (business_students.length > 0 && team.length != 3) team.push([business_students.pop(), "Business"]);
+            if (software_students.length > 0 && team.length != 3) team.push([software_students.pop(), "Software"]);
+            if (hardware_students.length > 0 && team.length != 3) team.push([hardware_students.pop(), "Hardware"]);
           }
-          console.log(team)
+          console.log(team);
         }
         while (business_students.length + software_students.length + hardware_students.length > 0) {
-          if (business_students.length > 0) extras.push(business_students.pop());
-          if (software_students.length > 0) extras.push(software_students.pop());
-          if (hardware_students.length > 0) extras.push(software_students.pop());
+          if (business_students.length > 0) extras.push([business_students.pop(), "Business"]);
+          if (software_students.length > 0) extras.push([software_students.pop(), "Software"]);
+          if (hardware_students.length > 0) extras.push([hardware_students.pop(), "Hardware"]);
         }
-
-        console.log(num_teams);
-
-        console.log(business_students);
-        console.log(software_students);
-        console.log(hardware_students);
+        console.log(extras);
     });
 };
 different.onclick = function() {
