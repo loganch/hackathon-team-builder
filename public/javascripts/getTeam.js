@@ -13,15 +13,19 @@ common.onclick = function() {
 
         // seperate each name into respective arrays based on category
         for (var i in rows) {
-            if (rows[i].whatareyouinterestedinworkingon == 'Business') {
-              business_students.push(rows[i].firstname + " " + rows[i].lastname);
-            }
-            if (rows[i].whatareyouinterestedinworkingon == 'Software') {
-              software_students.push(rows[i].firstname + " " + rows[i].lastname);
-            }
-            if (rows[i].whatareyouinterestedinworkingon == 'Hardware') {
-              hardware_students.push(rows[i].firstname + " " + rows[i].lastname);
-            }
+          var random = Math.floor(Math.random() * (10));
+          if (rows[i].whatareyouinterestedinworkingon == 'Business') {
+            if (random % 2 == 0) business_students.push(rows[i].firstname + " " + rows[i].lastname);
+            if (random % 2 != 0) business_students.unshift(rows[i].firstname + " " + rows[i].lastname);
+          }
+          if (rows[i].whatareyouinterestedinworkingon == 'Software') {
+            if (random % 2 == 0) software_students.push(rows[i].firstname + " " + rows[i].lastname);
+            if (random % 2 != 0) software_students.unshift(rows[i].firstname + " " + rows[i].lastname);
+          }
+          if (rows[i].whatareyouinterestedinworkingon == 'Hardware') {
+            if (random % 2 == 0) hardware_students.push(rows[i].firstname + " " + rows[i].lastname);
+            if (random % 2 != 0) hardware_students.unshift(rows[i].firstname + " " + rows[i].lastname);
+          }
         }
         console.log(business_students);
         console.log(software_students);
